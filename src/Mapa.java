@@ -16,16 +16,16 @@ public class Mapa extends JFrame {
     private JLabel textBienvenida;
     public JPanel panel;
 
-    private String categoriaSeleccionada;
-    private String cantidadSeleccionada;
+    public String categoriaSeleccionada;
+    public String cantidadSeleccionada;
 
     public Mapa() {
         Buscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 asignarDatos();
-                Asientos f = new Asientos();
-                f.setContentPane(new Asientos().panelA);
+                Asientos f = new Asientos(categoriaSeleccionada, cantidadSeleccionada);  // Pasamos ambos valores al constructor
+                f.setContentPane(f.panelA);
                 f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f.setVisible(true);
                 f.pack();
