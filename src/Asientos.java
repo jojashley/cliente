@@ -136,9 +136,9 @@ public class Asientos extends JFrame {
         return response;
     }
 
-    private String conectarServidor(String request) {
+    private String conectarServidor(String request) { //AQUI SE CONECTA AL SERVIDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
         String host = "127.0.0.1";
-        int port = 8080;
+        int port = 7878;
         String response = "";
 
         try (Socket socket = new Socket(host, port);
@@ -153,6 +153,7 @@ public class Asientos extends JFrame {
             response = new String(buffer, 0, bytesRead);
 
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error connecting to the server. Please try again.", "Connection Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
 
