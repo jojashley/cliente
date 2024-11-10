@@ -83,6 +83,13 @@ public class Compra extends JFrame {
         pack();
     }
 
+    private String comprar(String row, String seat) {
+        String request = "purchase" + "\t" + categoriaSeleccionada + "\t" + zonaSeleccionada + "\t" + row + "\t" + seat;
+        System.out.println(request);
+        String response = conectarServidor(request);
+        return response;
+    }
+
     private String cancelar(String row, String seat) {
         String request = "cancel" + "\t" + categoriaSeleccionada + "\t" + zonaSeleccionada + "\t" + row + "\t" + seat;
         System.out.println(request);
