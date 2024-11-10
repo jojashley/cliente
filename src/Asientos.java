@@ -7,11 +7,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.List;          // Para usar List
-import java.util.Map;           // Para usar Map
-import java.util.ArrayList;     // Para usar ArrayList
-import java.util.LinkedHashMap; // Para usar LinkedHashMap
-
+import java.util.List;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class Asientos extends JFrame {
     private JLabel AsientosText;
@@ -138,7 +137,7 @@ public class Asientos extends JFrame {
 
     private String conectarServidor(String request) { //AQUI SE CONECTA AL SERVIDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
         String host = "127.0.0.1";
-        int port = 7878;
+        int port = 8080;
         String response = "";
 
         try (Socket socket = new Socket(host, port);
