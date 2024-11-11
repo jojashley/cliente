@@ -32,9 +32,16 @@ public class Compra extends JFrame {
 
     public void cargarPluginPago() {
         try {
-
             pluginPago = (PluginPago) classList.get(pluginPagoSeleccionado).getDeclaredConstructor().newInstance();
-            realizarCompra();
+
+            // Confirmación antes de realizar la compra
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea confirmar la compra?", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                realizarCompra(); // Llama a realizarCompra solo si el usuario confirma
+            } else {
+                JOptionPane.showMessageDialog(this, "La compra ha sido cancelada.");
+                confirmarNo();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Debe seleccionar un plugin de pago.");
@@ -46,6 +53,7 @@ public class Compra extends JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, cargue un plugin de pago primero.");
             return;
         }
+
         boolean exito = pluginPago.procesarPago(opcionSeleccionada, zonaSeleccionada, categoriaSeleccionada);
         pagarCompra();
         if (exito) {
@@ -54,6 +62,7 @@ public class Compra extends JFrame {
             JOptionPane.showMessageDialog(this, "Error al procesar el pago.");
         }
     }
+
 
     private void inicializarInterfaz() {
         cargarPlugins();
@@ -250,6 +259,37 @@ public class Compra extends JFrame {
             dispose();
         }
 
+    }
+
+    public void confirmarNo(){
+        String[] asientos = opcionSeleccionada.split("\n");
+
+        for (String asiento : asientos) {
+            asiento = asiento.trim();
+
+            if (asiento.isEmpty()) {
+                continue;
+            }
+
+            String[] partes = asiento.split(", ");
+
+            if (partes.length != 2) {
+                System.err.println("Formato incorrecto en la opción seleccionada: " + asiento);
+                continue;
+            }
+
+            try {
+                String row = partes[0].split(": ")[1];
+                String seat = partes[1].split(": ")[1];
+
+                String response = cancelar(row, seat);
+                System.out.println("Respuesta del servidor para Row: " + row + ", Seat: " + seat + " - " + response);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.err.println("Error al procesar asiento: " + asiento + " - Formato inválido.");
+            }
+        }
+
+        dispose();
     }
 
 }
