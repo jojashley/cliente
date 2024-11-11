@@ -15,14 +15,7 @@ public class Main {
         f.setVisible(true);
         f.pack();
 
-        // Load plugins
-//        Map<String, Class> plugins = cargarPlugins();
 
-//        // Example usage: pass a plugin name to Compra
-//        String pluginName = "Plugins.PluginPagoImpl";  // Replace with your plugin's full class name
-//        Compra compra = new Compra("Entrada General", "Zona A", "VIP");
-//        compra.cargarPluginPago(pluginName);  // Load the plugin
-//        compra.setVisible(true);
     }
 
 

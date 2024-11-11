@@ -137,7 +137,7 @@ public class Asientos extends JFrame {
 
     private String conectarServidor(String request) { //AQUI SE CONECTA AL SERVIDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
         String host = "127.0.0.1";
-        int port = 8080;
+        int port = 7878;
         String response = "";
 
         try (Socket socket = new Socket(host, port);
