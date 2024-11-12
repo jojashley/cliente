@@ -32,16 +32,9 @@ public class Compra extends JFrame {
 
     public void cargarPluginPago() {
         try {
-            pluginPago = (PluginPago) classList.get(pluginPagoSeleccionado).getDeclaredConstructor().newInstance();
 
-            // Confirmación antes de realizar la compra
-            int respuesta = JOptionPane.showConfirmDialog(this, "¿Desea confirmar la compra?", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (respuesta == JOptionPane.YES_OPTION) {
-                realizarCompra(); // Llama a realizarCompra solo si el usuario confirma
-            } else {
-                JOptionPane.showMessageDialog(this, "La compra ha sido cancelada.");
-                confirmarNo();
-            }
+            pluginPago = (PluginPago) classList.get(pluginPagoSeleccionado).getDeclaredConstructor().newInstance();
+            realizarCompra();
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Debe seleccionar un plugin de pago.");
@@ -53,11 +46,11 @@ public class Compra extends JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, cargue un plugin de pago primero.");
             return;
         }
-
         boolean exito = pluginPago.procesarPago(opcionSeleccionada, zonaSeleccionada, categoriaSeleccionada);
-        pagarCompra();
+        //pagarCompra();
         if (exito) {
-            JOptionPane.showMessageDialog(this, "Compra realizada con éxito.");
+            //JOptionPane.showMessageDialog(this, "Compra realizada con éxito.");
+            pagarCompra();
         } else {
             JOptionPane.showMessageDialog(this, "Error al procesar el pago.");
         }
@@ -229,6 +222,7 @@ public class Compra extends JFrame {
     public void pagarCompra(){
         int respuesta = JOptionPane.showConfirmDialog(this, "Desea confirmar la compra?", " ", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (respuesta == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, "Compra realizada con éxito.");
             String[] asientos = opcionSeleccionada.split("\n");
 
             for (String asiento : asientos) {
@@ -257,6 +251,10 @@ public class Compra extends JFrame {
             }
 
             dispose();
+        }
+        else if(respuesta == JOptionPane.NO_OPTION ){
+            JOptionPane.showMessageDialog(this, "Compra cancelada.");
+            confirmarNo();
         }
 
     }
